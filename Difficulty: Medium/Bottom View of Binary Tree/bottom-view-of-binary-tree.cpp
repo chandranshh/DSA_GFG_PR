@@ -94,32 +94,45 @@ Node* buildTree(string str)
 //Function to return a list containing the bottom view of the given tree.
 
 class Solution {
-  public:
-    vector <int> bottomView(Node *root) {
-        // Your Code Here
-        vector<int>ans;
-        if(root==NULL){
+public:
+    vector<int> bottomView(Node *root) {
+        vector<int> ans;
+        if (root == NULL) {
             return ans;
         }
-        map<int, int>mp;
-        queue<pair<Node*, int>>q;
+        
+        map<int, int> mp; // Map to store horizontal distance to last encountered node's data
+        queue<pair<Node*, int>> q; // Queue for level order traversal with horizontal distance
+        
         q.push({root, 0});
-        while(!q.empty()){
-            auto it = q.front();
-            int line = it.second;
-            Node* temp = it.first;
-            q.pop();
-            mp[line] = temp->data;
-            if(temp->left!=NULL){
-                q.push({temp->left, line-1});
-            }
-            if(temp->right!=NULL){
-                q.push({temp->right, line+1});
+        
+        while (!q.empty()) {
+            int size = q.size();
+            
+            for (int i = 0; i < size; i++) {
+                auto it = q.front();
+                int line = it.second;
+                Node* temp = it.first;
+                q.pop();
+                
+                // Update map with the last encountered node's data at this horizontal distance
+                mp[line] = temp->data;
+                
+                // Push children of the current node to the queue with adjusted horizontal distance
+                if (temp->left) {
+                    q.push({temp->left, line - 1});
+                }
+                if (temp->right) {
+                    q.push({temp->right, line + 1});
+                }
             }
         }
-        for(auto mpp : mp){
-            ans.push_back(mpp.second);
+        
+        // Extract values from the map (bottom view nodes)
+        for (auto it : mp) {
+            ans.push_back(it.second);
         }
+        
         return ans;
     }
 };
