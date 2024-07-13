@@ -13,15 +13,19 @@ public:
     vector<int> help_classmate(vector<int> arr, int n) {
         stack<int> st;
         vector<int> ans(n, -1);
+        
+        for(int i = 0; i< arr.size();i++){
+            arr[i] = -arr[i];
+        }
 
         for (int i = n - 1; i >= 0; i--) {
-            while (!st.empty() && st.top() >= arr[i]) {
+            while (!st.empty() && st.top() <= arr[i]) {
                 st.pop();
             }
 
             if (i < n) {
                 if (!st.empty()) {
-                    ans[i] = st.top();
+                    ans[i] = abs(st.top());
                 } else {
                     ans[i] = -1;
                 }
