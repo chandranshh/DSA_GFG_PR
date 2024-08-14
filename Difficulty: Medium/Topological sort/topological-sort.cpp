@@ -4,7 +4,7 @@ using namespace std;
 
 // } Driver Code Ends
 //dfs topo using stack and recursion + backtrack
-/*class Solution
+class Solution
 {
     private:
     void dfs(int node, vector<int>& vis, stack<int>& st, vector<int> adj[]){
@@ -38,7 +38,6 @@ using namespace std;
         return ans;
     }
 };
-*/
 
 //bfs using queue
 class Solution
