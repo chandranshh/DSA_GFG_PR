@@ -3,6 +3,44 @@
 using namespace std;
 
 // } Driver Code Ends
+//dfs topo using stack and recursion + backtrack
+/*class Solution
+{
+    private:
+    void dfs(int node, vector<int>& vis, stack<int>& st, vector<int> adj[]){
+        vis[node] = 1;
+        for(auto neighbour : adj[node]){
+            if(vis[neighbour] == 0){
+                dfs(neighbour, vis, st, adj);
+            }
+        }
+        st.push(node);
+    }
+    
+    public:
+    vector<int> topoSort(int V, vector<int> adj[]) 
+    {
+        vector<int> vis(V, 0);
+        stack<int> st;
+        vector<int> ans; 
+        
+        for(int node = 0; node < V; node++){
+            if(vis[node] == 0){
+                dfs(node, vis, st, adj);
+            }
+        }
+        
+        while(!st.empty()){
+            ans.push_back(st.top());
+            st.pop();
+        }
+        
+        return ans;
+    }
+};
+*/
+
+//bfs using queue
 class Solution
 {
     public:
@@ -35,7 +73,6 @@ class Solution
                         q.push(neighbour);
                     }
                 }
-                
             }
         }
         
