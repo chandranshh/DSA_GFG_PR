@@ -105,7 +105,6 @@ class Solution
     vector<int> ans;
     if (!root) return ans;
 
-    // Map to store nodes based on vertical levels.
     map<int, vector<int>> mp; // <level, elements>
     queue<pair<Node*, int>> q;
     q.push({root, 0});
@@ -115,10 +114,8 @@ class Solution
         int level = q.front().second;
         q.pop();
 
-        // Store the node's value in the map at the correct vertical level.
         mp[level].push_back(node->data);
 
-        // Push the left and right children to the queue with updated levels.
         if (node->left) {
             q.push({node->left, level - 1});
         }
@@ -127,7 +124,6 @@ class Solution
         }
     }
 
-    // Collect the values in a single result vector.
     for (const auto& entry : mp) {
         for (int val : entry.second) {
             ans.push_back(val);
